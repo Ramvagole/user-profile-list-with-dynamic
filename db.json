@@ -1,0 +1,10 @@
+{
+    "posts": [
+        {"id":"1","name":"manik","class":"10th","rollno":"120"},
+        {"id":"2","name":"sham","class":"9th","rollno":"110"}
+    ],
+    "comments": [
+      { "id": 1, "body": "some comment", "postId": 1 }
+    ],
+    "profile": { "name": "typicode" }
+  }

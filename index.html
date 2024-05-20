@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    
+    function App(){
+        let [b,val]=React.useState("")
+        let [a,setVal]=React.useState([])
+        React.useEffect(()=>{
+            axios.get("http://localhost:3000/posts").then((res)=>{setVal(res.data)})
+        },[b])
+        function kk(e){
+            console.log(e.target.value)
+            axios.get(`http://localhost:3000/posts?name=${e.target.value}`).then((res)=>{setVal(res.data)})
+        }
+        return(
+            <>
+            <input type="text" onChange={kk} placeholder="Search...." />
+            <div style={{display:"flex",gap:"25px",marginTop:"25px"}}>
+                {
+                    a.map((v,i)=>{
+                        return(
+                            <div key={i} style={{border:"1px solid black",textAlign:"center",width:"150px",height:"150px"}}>
+                                <h2>Name:{v.name}</h2>
+                                <h2>Class:{v.class}</h2>
+                                <h2>Roll No:{v.rollno}</h2>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            </>
+        )
+    }
+    ReactDOM.render(<App/>,document.getElementById("root"))
+  </script>
+</html>
